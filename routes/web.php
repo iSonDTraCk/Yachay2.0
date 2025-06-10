@@ -17,8 +17,8 @@ Route::post('/registro/alumno',   [AccesoController::class, 'storeAlumno'])->nam
 Route::post('/registro/profesor', [AccesoController::class, 'storeProfesor'])->name('registro.profesor.store');
 
 // Home tras login
-Route::get('/alumno/home',   function () { return view('alumno.home');   })->name('alumno.home');
-Route::get('/profesor/home', function () { return view('profesor.home'); })->name('profesor.home');
+Route::get('/alumno/home', [LessonController::class, 'alumnoHome'])->name('alumno.home');
+Route::get('/profesor/home', [LessonController::class, 'profesorHome'])->name('profesor.home');
 
 // CRUD de Lecciones (incluye index, create, store, show, edit, update, destroy)
 Route::resource('lessons', LessonController::class);

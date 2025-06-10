@@ -8,7 +8,7 @@
 
     {{-- Buscador y Filtros --}}
     <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
-        <input type="text" class="form-control flex-grow-1" placeholder="Buscar lección">
+        <input type="text" class="form-control flex-grow-1" placeholder="Buscar clase o lección">
         <select class="form-select w-auto">
             <option selected>Universidad: Todas</option>
         </select>
@@ -17,39 +17,22 @@
         </select>
     </div>
 
-    {{-- Validamos si $lessons existe y no está vacío --}}
-    @if (isset($lessons) && $lessons->isNotEmpty())
-        {{-- Render dinámico por nivel --}}
-        @foreach ($lessons as $level => $group)
-            @php
-                $colorMap = [
-                    'Principiante' => 'success',
-                    'Intermedio' => 'warning',
-                    'Avanzado' => 'danger',
-                    'Superavanzado' => 'dark'
-                ];
-                $color = $colorMap[$level] ?? 'primary';
-            @endphp
-
-            <h4 class="mb-3 text-{{ $color }}">
-                <i class="fas fa-layer-group"></i> Nivel: {{ ucfirst($level) }}
-            </h4>
-
+    {{-- Validamos si $courses existe y no está vacío --}}
+    @if (isset($courses) && $courses->isNotEmpty())
+        @foreach ($courses as $level => $lessons)
+            {{-- Sección de Clases por Nivel --}}
+            <h4 class="mb-3 text-primary"><i class="fas fa-book"></i> Nivel: {{ ucfirst($level) }}</h4>
             <div class="scroll-wrapper mb-5">
                 <div class="scroll-container d-flex flex-nowrap gap-3">
-                    @foreach ($group as $lesson)
+                    @foreach ($lessons as $lesson)
                         <div class="card shadow-sm flex-shrink-0" style="width: 300px;">
                             <div class="card-body text-center">
-                                <div class="fs-1 text-{{ $color }} mb-2"><i class="fas fa-book-open"></i></div>
-                                <span class="badge bg-{{ $color }} mb-2 text-uppercase">{{ $lesson->level }}</span>
-                                <h6 class="card-subtitle mb-2 text-muted">
-                                    <i class="fas fa-school"></i> {{ $lesson->university ?? 'Yachay Wasi' }}
-                                </h6>
+                                <div class="fs-1 text-primary mb-2"><i class="fas fa-book-open"></i></div>
+                                <span class="badge bg-primary mb-2">{{ $lesson->level }}</span>
+                                <h6 class="card-subtitle mb-2 text-muted"><i class="fas fa-school"></i> {{ $lesson->university ?? 'Yachay Wasi' }}</h6>
                                 <h5 class="card-title">{{ $lesson->title }}</h5>
                                 <p class="card-text">{{ $lesson->description }}</p>
-                                <a href="{{ route('lessons.show', $lesson->id) }}" class="btn btn-outline-{{ $color }} btn-sm mt-2">
-                                    Ver Detalles
-                                </a>
+                                <a href="{{ route('lessons.show', $lesson->id) }}" class="btn btn-outline-primary btn-sm mt-2">Ver Detalles</a>
                             </div>
                             <div class="card-footer text-center text-muted">
                                 <i class="far fa-calendar-alt"></i> {{ $lesson->start_date }} - {{ $lesson->end_date }}

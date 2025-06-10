@@ -18,7 +18,6 @@
         </script>
     @endif
 
-
     <div>
         <h2 class="mb-4 text-center"><i class="fas fa-chalkboard-teacher"></i> Panel del Profesor</h2>
 
@@ -43,21 +42,21 @@
         <h4 class="mb-3 text-primary"><i class="fas fa-book"></i> Mis Clases</h4>
         <div class="scroll-wrapper mb-5">
             <div class="scroll-container d-flex flex-nowrap gap-3">
-                @for ($i = 1; $i <= 4; $i++)
+                @foreach ($lessons as $lesson)
                 <div class="card shadow-sm flex-shrink-0" style="width: 300px;">
                     <div class="card-body text-center">
                         <div class="fs-1 text-primary mb-2"><i class="fas fa-book-open"></i></div>
-                        <span class="badge bg-primary mb-2">Clase Activa</span>
-                        <h6 class="card-subtitle mb-2 text-muted"><i class="fas fa-school"></i> Yachay Wasi</h6>
-                        <h5 class="card-title">Clase de Quechua {{$i}}</h5>
-                        <p class="card-text">Descripción breve de la clase. Aquí puedes incluir detalles importantes.</p>
-                        <a href="{{ route('lessons.show', $i) }}" class="btn btn-outline-primary btn-sm mt-2">Ver Detalles</a>
+                        <span class="badge bg-primary mb-2">{{ $lesson->level }}</span>
+                        <h6 class="card-subtitle mb-2 text-muted"><i class="fas fa-school"></i> {{ $lesson->university ?? 'Yachay Wasi' }}</h6>
+                        <h5 class="card-title">{{ $lesson->title }}</h5>
+                        <p class="card-text">{{ $lesson->description }}</p>
+                        <a href="{{ route('lessons.show', $lesson->id) }}" class="btn btn-outline-primary btn-sm mt-2">Ver Detalles</a>
                     </div>
                     <div class="card-footer text-center text-muted">
-                        <i class="far fa-calendar-alt"></i> 01 Ene - 31 Mar
+                        <i class="far fa-calendar-alt"></i> {{ $lesson->start_date }} - {{ $lesson->end_date }}
                     </div>
                 </div>
-                @endfor
+                @endforeach
             </div>
         </div>
 
@@ -65,21 +64,21 @@
         <h4 class="mb-3 text-success"><i class="fas fa-graduation-cap"></i> Mis Lecciones</h4>
         <div class="scroll-wrapper mb-5">
             <div class="scroll-container d-flex flex-nowrap gap-3">
-                @for ($i = 1; $i <= 4; $i++)
+                @foreach ($lessons as $lesson)
                 <div class="card shadow-sm flex-shrink-0" style="width: 300px;">
                     <div class="card-body text-center">
                         <div class="fs-1 text-success mb-2"><i class="fas fa-chalkboard"></i></div>
                         <span class="badge bg-success mb-2">Lección Activa</span>
-                        <h6 class="card-subtitle mb-2 text-muted"><i class="fas fa-chalkboard-teacher"></i> Clase {{$i}}</h6>
-                        <h5 class="card-title">Lección {{$i}}</h5>
-                        <p class="card-text">Contenido breve de la lección. Aquí puedes incluir un resumen.</p>
-                        <a href="{{ route('lessons.edit', $i) }}" class="btn btn-outline-success btn-sm mt-2">Editar</a>
+                        <h6 class="card-subtitle mb-2 text-muted"><i class="fas fa-chalkboard-teacher"></i> {{ $lesson->title }}</h6>
+                        <h5 class="card-title">{{ $lesson->title }}</h5>
+                        <p class="card-text">{{ $lesson->description }}</p>
+                        <a href="{{ route('lessons.edit', $lesson->id) }}" class="btn btn-outline-success btn-sm mt-2">Editar</a>
                     </div>
                     <div class="card-footer text-center text-muted">
-                        <i class="far fa-calendar-alt"></i> 01 Abr - 30 Jun
+                        <i class="far fa-calendar-alt"></i> {{ $lesson->start_date }} - {{ $lesson->end_date }}
                     </div>
                 </div>
-                @endfor
+                @endforeach
             </div>
         </div>
     </div>

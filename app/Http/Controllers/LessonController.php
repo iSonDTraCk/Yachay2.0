@@ -9,26 +9,21 @@ use Illuminate\Support\Facades\Session;
 class LessonController extends Controller
 {
     /**
-     * Muestra todas las lecciones agrupadas por nivel.
-     * Muestra vistas distintas según el rol: profesor o alumno.
+     * Muestra todas las lecciones agrupadas por nivel para el alumno.
      */
-    public function index()
+    public function alumnoHome()
     {
-        $lessons = Lesson::all()->groupBy('level');
+        $courses = Lesson::all()->groupBy('level'); // Agrupa las lecciones por nivel
+        return view('alumno.home', compact('courses')); // Envía las lecciones agrupadas a la vista del alumno
+    }
 
-        $rol = Session::get('rol');
-
-        if ($rol === 'profesor') {
-            // Vista para profesor
-            return view('lessons.index', compact('lessons'));
-        }
-
-        if ($rol === 'alumno') {
-            // Vista para alumno (home)
-            return view('alumno.home', compact('lessons'));
-        }
-
-        abort(403, 'No autorizado');
+    /**
+     * Muestra todas las lecciones para el profesor.
+     */
+    public function profesorHome()
+    {
+        $lessons = Lesson::all(); // Obtén todas las lecciones sin agrupar
+        return view('profesor.home', compact('lessons')); // Envía las lecciones a la vista del profesor
     }
 
     /**
@@ -73,7 +68,7 @@ class LessonController extends Controller
         ]));
 
         return redirect()
-            ->route('lessons.index')
+            ->route('profesor.home')
             ->with('success', 'Lección creada con éxito.');
     }
 
@@ -120,11 +115,9 @@ class LessonController extends Controller
     
         $lesson->update($validated);
     
-        // 🔁 Cambia la redirección aquí
         return redirect('/profesor/home')
             ->with('success', 'Lección actualizada con éxito.');
     }
-    
 
     /**
      * Elimina una lección.
@@ -139,7 +132,7 @@ class LessonController extends Controller
         $lesson->delete();
 
         return redirect()
-            ->route('lessons.index')
+            ->route('profesor.home')
             ->with('success', 'Lección eliminada con éxito.');
     }
 }
