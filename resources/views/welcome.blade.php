@@ -42,7 +42,7 @@
     .welcome-content {
         position: relative;
         z-index: 2;
-        background-color: white;
+        background-color: #ffffff;
         padding: 2.5rem;
         border-radius: 12px;
         box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
@@ -52,17 +52,22 @@
         box-sizing: border-box;
     }
 
+    .welcome-logo {
+        width: 90px;
+        margin-bottom: 1rem;
+    }
+
     .welcome-title {
         font-size: 2rem;
         font-weight: bold;
-        color: magenta;
+        color: #B03060; /* Magenta brillante */
         margin-bottom: 0.5rem;
     }
 
     .welcome-subtitle {
         font-size: 1.25rem;
         margin-bottom: 1.5rem;
-        color: #333;
+        color: #000000; /* Magenta oscuro SELCT ROL*/
     }
 
     .form-group {
@@ -74,19 +79,24 @@
         width: 100%;
         padding: 0.5rem;
         border-radius: 6px;
-        border: 1px solid #ccc;
+        border: 1px solid #E89AC8; /* Rosa claro */
         box-sizing: border-box;
     }
 
     .btn-primary {
         width: 100%;
         padding: 0.6rem;
-        background-color: #4b34dd;
+        background-color: #B03060; /* Magenta oscuro */
         color: white;
         border: none;
         border-radius: 6px;
         font-weight: bold;
         cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #FF00CC; /* Magenta brillante */
     }
 
     .register-links {
@@ -97,8 +107,12 @@
 
     .register-links a {
         margin: 0 0.5rem;
-        color: #4b34dd;
+        color: #B03060;
         text-decoration: none;
+    }
+
+    .register-links a:hover {
+        text-decoration: underline;
     }
 
     .form-error {
@@ -151,8 +165,10 @@
     <div class="welcome-background"></div>
 
     <div class="welcome-content">
-        <h1 class="welcome-title">YACHAY</h1>
-        <h2 class="welcome-subtitle">Selecciona tu rol</h2>
+        <!-- Logo HY -->
+        <img src="{{ asset('images/fondo2.png') }}" alt="Logo Yachay" class="welcome-logo">
+        <h1 class="welcome-title">Hatun Yachay</h1>
+        <h2 class="welcome-subtitle">Selecciona tu rol  </h2>
 
         @if(session('error'))
             <div class="alert alert-error">
@@ -192,7 +208,7 @@
         </form>
 
         <div class="register-links">
-            <p>¿No tienes cuenta?</p>
+            <p>¿Aún no tienes cuenta?</p>
             <a href="{{ route('acceso.registro', ['rol' => 'alumno']) }}">Crear como Alumno</a>
             <a href="{{ route('acceso.registro', ['rol' => 'profesor']) }}">Crear como Profesor</a>
         </div>

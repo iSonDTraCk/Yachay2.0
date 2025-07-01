@@ -54,6 +54,15 @@
             <input type="date" name="end_date" class="form-control" id="end_date" value="{{ old('end_date') }}" required>
         </div>
 
+        <div class="mb-3">
+            <label for="status" class="form-label">Estado</label>
+            <select name="status" class="form-select" id="status" required>
+                <option value="">Selecciona un estado</option>
+                <option value="PUBLICADA" {{ old('status') == 'PUBLICADA' ? 'selected' : '' }}>PUBLICADA</option>
+                <option value="BORRADOR" {{ old('status') == 'BORRADOR' ? 'selected' : '' }}>BORRADOR</option>
+            </select>
+        </div>
+
         <div class="text-center">
             <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar Lección</button>
             <a href="{{ route('lessons.index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Cancelar</a>
