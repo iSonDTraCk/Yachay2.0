@@ -2,3 +2,41 @@
 !private/
 !public/
 !.gitignore
+
+# Ignorar dependencias
+/vendor/
+/node_modules/
+
+# Ignorar archivos de configuración sensibles
+.env
+.env.*
+
+# Ignorar caché y logs
+/storage/*.key
+/storage/logs/*.log
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+
+# Ignorar archivos de compilación
+/public/storage
+/public/hot
+/public/mix-manifest.json
+
+# Ignorar configuraciones locales
+*.DS_Store
+*.idea
+*.vscode
+
+# Ignorar archivos de pruebas
+/tests/_output/
+/tests/_support/_generated/
+
+# Ignorar archivos de Composer y npm
+composer.lock
+package-lock.json
+
+# Ignorar archivos temporales
+*.tmp
+*.swp
+*.bak

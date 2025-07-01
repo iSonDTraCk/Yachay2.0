@@ -1,4 +1,3 @@
-{{-- filepath: c:\xampp\htdocs\HatunYachay\resources\views\lessons\show.blade.php --}}
 @extends('layouts.app')
 
 @section('content')
@@ -64,7 +63,7 @@
                     <ul class="list-group list-group-flush">
                         @foreach((array) $lesson->resources as $resource)
                             <li class="list-group-item ps-0 border-0 bg-transparent">
-                                <a href="{{ asset('storage/' . $resource) }}" target="_blank"
+                                <a href="{{ asset($resource) }}" target="_blank"
                                    class="fw-bold resource-link d-flex align-items-center">
                                     <span class="icon-circle bg-resource me-2"><i class="fas fa-file-alt"></i></span>
                                     <span class="link-text">{{ basename($resource) }}</span>
@@ -109,7 +108,7 @@
 @push('styles')
 <style>
     .label-title {
-        color: #22223b !important; /* gris oscuro elegante */
+        color: #22223b !important;
         font-weight: 700;
         font-size: 1.18rem;
         letter-spacing: 0.01em;
@@ -124,22 +123,11 @@
         font-size: 1.2rem;
         color: #fff;
     }
-    .bg-link {
-        background: #2563eb;
-        color: #fff !important;
-    }
-    .bg-link-soft {
-        background: #e0e7ff;
-        color: #2563eb !important;
-    }
-    .bg-resource {
-        background: #059669;
-        color: #fff !important;
-    }
-    .bg-resource-soft {
-        background: #d1fae5;
-        color: #059669 !important;
-    }
+    .bg-link { background: #2563eb; color: #fff !important; }
+    .bg-link-soft { background: #e0e7ff; color: #2563eb !important; }
+    .bg-resource { background: #059669; color: #fff !important; }
+    .bg-resource-soft { background: #d1fae5; color: #059669 !important; }
+
     .external-link {
         color: #2563eb !important;
         font-size: 1.08rem;
@@ -168,33 +156,24 @@
         word-break: break-all;
     }
 
-    /* --- NUEVO: Contenedor con Scrollbar --- */
     .scrollable-list-container {
-        max-height: 240px; /* Altura máxima antes de mostrar scroll */
-        overflow-y: auto;
-        background-color: #f8f9fa; /* Fondo suave para el contenedor */
+        max-height: 240px; /* Altura máxima del contenedor */
+        overflow-y: scroll; /* Forzar la visualización del scrollbar vertical */
+        background-color: #f8f9fa;
         border: 1px solid #dee2e6;
         border-radius: 0.75rem;
         padding: 0.75rem;
     }
 
-    /* Estilo del scrollbar (para Webkit: Chrome, Safari, etc.) */
     .scrollable-list-container::-webkit-scrollbar {
-        width: 8px;
+        width: 8px; /* Ancho del scrollbar */
     }
-
-    .scrollable-list-container::-webkit-scrollbar-track {
-        background: transparent;
-    }
-
     .scrollable-list-container::-webkit-scrollbar-thumb {
-        background: #cccccc;
-        border-radius: 10px;
+        background: #adb5bd; /* Color del scrollbar */
+        border-radius: 10px; /* Bordes redondeados */
     }
-
     .scrollable-list-container::-webkit-scrollbar-thumb:hover {
-        background: #b3b3b3;
-
+        background: #868e96; /* Color al pasar el mouse */
     }
 
     .form-check-input {
@@ -204,7 +183,6 @@
         border-radius: 1rem;
         transition: background-color 0.2s;
     }
-
     .form-check-input:checked {
         background-color: #059669;
     }
